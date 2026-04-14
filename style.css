@@ -4,6 +4,8 @@
   --card-bg: #ffffff;
   --text-primary: #1e293b;
   --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --history-bg: #f1f5f9;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
@@ -15,6 +17,16 @@
   --ball-21-30: #ff7239;
   --ball-31-40: #aaaaaa;
   --ball-41-45: #b0d840;
+}
+
+[data-theme='dark'] {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --history-bg: #0f172a;
+  --shadow-premium: 0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2);
 }
 
 * {
@@ -35,6 +47,7 @@ body {
   padding: 20px;
   position: relative;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Texture Effect */
@@ -50,6 +63,11 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
+[data-theme='dark'] .background-texture {
+  opacity: 0.1;
+  filter: invert(1);
+}
+
 .container {
   max-width: 500px;
   width: 100%;
@@ -59,13 +77,39 @@ body {
   box-shadow: var(--shadow-premium);
   text-align: center;
   z-index: 1;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.theme-toggle {
+  background: var(--history-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--border-color);
 }
 
 header h1 {
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.025em;
-  margin-bottom: 8px;
   color: var(--primary-color);
 }
 
@@ -188,9 +232,10 @@ header h1 {
   gap: 8px;
   padding: 12px;
   border-radius: 8px;
-  background-color: #f1f5f9;
+  background-color: var(--history-bg);
   margin-bottom: 8px;
   animation: slideIn 0.3s ease-out both;
+  transition: background-color 0.3s ease;
 }
 
 @keyframes slideIn {
